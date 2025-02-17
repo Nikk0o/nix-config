@@ -27,7 +27,7 @@
 		#./home-manager/home.nix
 		./config/config-files/configuration.nix
 		./config/config-files/hardware-configuration.nix
-		./condig/config-files/git.nix
+		./config/programs/git.nix
 		./config/config-files/xsession.nix
 		];
       };

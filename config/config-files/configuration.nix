@@ -6,7 +6,7 @@
 
   let background-sddm = pkgs.stdenvNoCC.mkDerivation {
   	name = "SDDM-rat_bg";
-	src = ../bg/biohazard_2_blur.png;
+	src = ../sddm-bg/biohazard_2_blur.png;
 	dontUnpack = true;
 	installPhase = '' cp $src $out '';
       };
@@ -30,7 +30,7 @@
   	"100.108.199.83" = [ "sirius.lagartao.gay" ];
   };
 
-  environment.sessionVariables = { FLAKE_PATH = "/etc/nixos/#hostname"; };
+  environment.variables.EDITOR = "neovim";
 
   # Set your time zone.
   time.timeZone = "America/Sao_Paulo";
@@ -139,6 +139,7 @@
     rofi-wayland
     xwayland
     nx-libs
+    parsec-bin
     #  thunderbird
     ];
   };

@@ -4,6 +4,7 @@
 	vimAlias = true;
 	viAlias = true;
 	plugins = with pkgs.vimPlugins; [
+		nvim-treesitter.withPlugins = (p: [ p.c p.nix p.vim p.verilog ])
 		vim-gitgutter
 		indent-blankline-nvim
 		lualine-nvim
