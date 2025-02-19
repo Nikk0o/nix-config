@@ -30,8 +30,6 @@
   	"100.108.199.83" = [ "sirius.lagartao.gay" ];
   };
 
-  environment.variables.EDITOR = "neovim";
-
   # Set your time zone.
   time.timeZone = "America/Sao_Paulo";
 
@@ -49,6 +47,12 @@
     LC_TELEPHONE = "en_US.UTF-8";
     LC_TIME = "en_US.UTF-8";
   };
+
+  hardware.bluetooth.enable = true;
+  hardware.bluetooth.powerOnBoot = true;
+  services.blueman.enable = true;
+
+
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
@@ -140,6 +144,8 @@
     xwayland
     nx-libs
     parsec-bin
+    simple64
+    # bluez
     #  thunderbird
     ];
   };

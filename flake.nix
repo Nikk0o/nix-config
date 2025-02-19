@@ -25,10 +25,10 @@
         # > Our main nixos configuration file <
         modules = [
 		#./home-manager/home.nix
-		./config/config-files/configuration.nix
-		./config/config-files/hardware-configuration.nix
+		./config/configuration.nix
+		./config/hardware-configuration.nix
 		./config/programs/git.nix
-		./config/config-files/xsession.nix
+		# ./config/xsession.nix
 		];
       };
     };
