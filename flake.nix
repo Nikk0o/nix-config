@@ -15,7 +15,7 @@
   } @ inputs: let
     inherit (self) outputs;
   in {
-    overlays = import ./overlays {inherit inputs;};
+    # overlays = import ./overlays {inherit inputs;};
 
     # NixOS configuration entrypoint
     # Available through 'nixos-rebuild --flake .#your-hostname'

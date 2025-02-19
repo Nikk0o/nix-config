@@ -6,7 +6,7 @@
 
   let background-sddm = pkgs.stdenvNoCC.mkDerivation {
   	name = "SDDM-rat_bg";
-	src = ../sddm-bg/biohazard_2_blur.png;
+	src = sddm-bg/biohazard_2_blur.png;
 	dontUnpack = true;
 	installPhase = '' cp $src $out '';
       };
