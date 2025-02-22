@@ -92,6 +92,7 @@
   };
 
   environment.systemPackages = with pkgs; [
+  	font-awesome
   	kitty
 	(writeTextDir "share/sddm/themes/breeze/theme.conf.user" ''
 			[General]
@@ -145,6 +146,7 @@
     nx-libs
     parsec-bin
     simple64
+    iverilog
     # bluez
     #  thunderbird
     ];
