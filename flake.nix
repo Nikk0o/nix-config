@@ -28,6 +28,7 @@
 		./config/configuration.nix
 		./config/hardware-configuration.nix
 		./config/programs/git.nix
+		./config/programs/gowin.nix
 		# ./config/xsession.nix
 		];
       };

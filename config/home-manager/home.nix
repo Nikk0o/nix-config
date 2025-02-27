@@ -24,6 +24,11 @@
 	];
   };
 
+  xdg.desktopEntries.gowin_ide = {
+  	name = "Gowin IDE";
+	exec = "gw_ide";
+  }
+
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
   # introduces backwards incompatible changes.
@@ -38,7 +43,7 @@
   home.packages = with pkgs; [
     xorg.libX11
     htop
-    
+    (pkgs.callPackage ../programs/gowin.nix)
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
     # pkgs.hello
