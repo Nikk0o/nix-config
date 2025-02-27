@@ -43,7 +43,7 @@
   home.packages = with pkgs; [
     xorg.libX11
     htop
-    (pkgs.callPackage ../programs/gowin.nix)
+    (pkgs.callPackage ../programs/gowin.nix {})
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
     # pkgs.hello
