@@ -52,7 +52,7 @@
   hardware.bluetooth.powerOnBoot = true;
   services.blueman.enable = true;
 
-
+  programs.steam.enable = true;
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
@@ -138,15 +138,13 @@
     telegram-desktop
     discord
     krita
-    libgcc
-    gdb
-    cmake
     rofi-wayland
     xwayland
     nx-libs
     parsec-bin
     simple64
-    iverilog
+    blender
+    python312Packages.apycula
     # bluez
     #  thunderbird
     ];
