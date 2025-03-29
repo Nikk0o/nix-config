@@ -20,13 +20,13 @@
 		nvim-web-devicons
 		lsp_signature-nvim
 		nvim-lspconfig
-		nvim-treesitter
+		(pkgs.vimPlugins.nvim-treesitter.withPlugins (p: [ p.c p.vim ]))
 	];
   };
 
   xdg.desktopEntries.gowin_ide = {
   	name = "Gowin IDE";
-	exec = "gw_ide";
+	exec = "";
   }
 
   # This value determines the Home Manager release that your configuration is
@@ -43,7 +43,6 @@
   home.packages = with pkgs; [
     xorg.libX11
     htop
-    (pkgs.callPackage ../programs/gowin.nix {})
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
     # pkgs.hello

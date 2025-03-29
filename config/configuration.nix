@@ -16,6 +16,7 @@
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
+  boot.initrd.systemd.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
  networking.hostName = "Antares"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -51,6 +52,8 @@
   hardware.bluetooth.enable = true;
   hardware.bluetooth.powerOnBoot = true;
   services.blueman.enable = true;
+  hardware.opentabletdriver.enable = true;
+
 
   programs.steam.enable = true;
 
@@ -92,8 +95,12 @@
   };
 
   environment.systemPackages = with pkgs; [
+  	glibc
+	nix-index
   	font-awesome
   	kitty
+	brightnessctl
+	tpm2-tss
 	(writeTextDir "share/sddm/themes/breeze/theme.conf.user" ''
 			[General]
 			background=${background-sddm}		'')
@@ -145,10 +152,22 @@
     simple64
     blender
     python312Packages.apycula
+    libreoffice-qt
+    hunspell
+    hunspellDicts.pt_BR
+    hunspellDicts.en_US
+    hyprpaper
+    waybar
+    graphviz
+    xdot
+    hyprshot
+    prismlauncher
     # bluez
     #  thunderbird
     ];
   };
+
+  programs.nix-ld.enable = true;
 
   # The state version is required and should stay at the version you
   # originally in  # Install firefox.
