@@ -16,5 +16,8 @@
 		nerdtree
 		nvim-tree-lua
 	];
-
+	let configPath = "/etc/nixos/config/programs";
+	in home.file."${config.xdg.configHome}/nvim/init.lua" = {
+		source = mkForce (config.lib.file.mkOutOfStoreSymlink "${configPath}/init.lua");
+	};
 }
