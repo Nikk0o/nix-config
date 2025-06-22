@@ -12,9 +12,11 @@
       };
   in
   {
-  imports = [ ];#<home-manager/nixos> ];
+  imports = [ ];
 
   # Bootloader.
+  boot.loader.grub.enable = false;
+
   boot.loader.systemd-boot.enable = true;
   boot.initrd.systemd.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -62,6 +64,9 @@
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
+  services.udev.extraRules = ''SUBSYSTEM=="usb", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6010", MODE="0666"
+  SUBSYSTEM=="usb", ATTRS{idVendor}=="0925", ATTRS{idProduct}=="3881", MODE="0666"'';
+
   services.displayManager = {
   	sddm = {
   		enable = true;
@@ -74,6 +79,8 @@
   		theme = "breeze";
   	};
   };
+
+  services.hypridle.enable = true;
 
   # Configure keymap in X11
   services.xserver = {
@@ -110,6 +117,10 @@
   	#  wget
   	];
 
+  programs.hyprlock = {
+    enable = true;
+  };
+
   # Configure console keymap
   console.keyMap = "br-abnt2";
 
@@ -117,7 +128,7 @@
   services.printing.enable = true;
 
   # Enable sound with pipewire.
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -158,7 +169,6 @@
     hunspellDicts.en_US
     hyprpaper
     waybar
-    graphviz
     xdot
     hyprshot
     prismlauncher
@@ -166,6 +176,8 @@
     #  thunderbird
     ];
   };
+
+  fonts.packages = with pkgs; [ nerd-fonts.symbols-only ];
 
   programs.nix-ld.enable = true;
 

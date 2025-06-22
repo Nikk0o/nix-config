@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 
 {
@@ -12,6 +12,7 @@
 	vimAlias = true;
 	viAlias = true;
 	plugins = with pkgs.vimPlugins; [
+		(nvim-treesitter.withPlugins (p: [ p.c p.java p.verilog p.nix p.python p.vim p.lua p.asm p.asm p.haskell ]))
 		vim-gitgutter
 		indent-blankline-nvim
 		lualine-nvim
@@ -20,14 +21,32 @@
 		nvim-web-devicons
 		lsp_signature-nvim
 		nvim-lspconfig
-		(pkgs.vimPlugins.nvim-treesitter.withPlugins (p: [ p.c p.vim ]))
+		nvim-tree-lua
 	];
-  };
+	};
 
-  xdg.desktopEntries.gowin_ide = {
-  	name = "Gowin IDE";
-	exec = "";
-  }
+  imports = [ ];
+
+  services.hypridle = {
+    enable = true;
+    settings = {
+      general = {
+        before_sleep_cmd = "loginctl lock-session";
+	lock_cmd = "pidof hyprlock || hyprlock";
+      };
+      listener = [
+        {
+         timeout = 150;
+	 on-timeout = "brightnessctl -s set 10";
+         on-resume = "brightnessctl -r";
+	}
+	{
+	 timeout = 300;
+	 on-timeout = "systemctl suspend";
+	}
+      ];
+    };
+  };
 
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release

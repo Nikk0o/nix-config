@@ -24,7 +24,7 @@
         specialArgs = {inherit inputs outputs;};
         # > Our main nixos configuration file <
         modules = [
-		#./home-manager/home.nix
+		#./config/home-manager/home.nix
 		./config/configuration.nix
 		./config/hardware-configuration.nix
 		./config/programs/git.nix
@@ -42,8 +42,7 @@
         extraSpecialArgs = {inherit inputs outputs;};
         # > Our main home-manager configuration file <
         modules = [
-		./home-manager/home.nix
-		./programs/nvim.nix
+		./config/home-manager/home.nix
 		];
       };
     };
