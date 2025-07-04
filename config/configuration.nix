@@ -172,6 +172,11 @@
     xdot
     hyprshot
     prismlauncher
+    rust-analyzer
+    vimPlugins.nvim-lspconfig
+    gcc
+    ffmpeg
+    (import modules/zen.nix {inherit pkgs stdenv;}).zen-pkg
     # bluez
     #  thunderbird
     ];
