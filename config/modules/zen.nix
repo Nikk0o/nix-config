@@ -22,7 +22,6 @@ rec {
 
     runtimeDependencies = with pkgs; [
       libGL
-      libpci
     ];
 
     installPhase =
