@@ -2,24 +2,25 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, inputs, ... }:
 
   let background-sddm = pkgs.stdenvNoCC.mkDerivation {
-  	name = "SDDM-rat_bg";
-	src = sddm-bg/biohazard_2_blur.png;
-	dontUnpack = true;
-	installPhase = '' cp $src $out '';
+		name = "SDDM-rat_bg";
+		src = other_files/biohazard_2_blur.png;
+		dontUnpack = true;
+		installPhase = '' cp $src $out '';
+      };
+      home-manager = builtins.fetchTarball {
+        url = https://github.com/nix-community/home-manager/archive/release-25.05.tar.gz;
+        sha256 = "026rvynmzmpigax9f8gy9z67lsl6dhzv2p6s8wz4w06v3gjvspm1";
       };
   in
   {
-  imports = [ ];
+  imports = [
+    (import "${home-manager}/nixos")
+		(import ./modules/hyprland.nix)
+  ];
 
-  # Bootloader.
-  boot.loader.grub.enable = false;
-
-  boot.loader.systemd-boot.enable = true;
-  boot.initrd.systemd.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
  networking.hostName = "Antares"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
@@ -90,15 +91,6 @@
   	};
 	desktopManager.xfce.enable = true;
   	desktopManager.xterm.enable = false;
-	displayManager.lightdm = {
-  		enable = false;
-		greeters.gtk.enable = true;
-		background = /home/niko/Wallpapers/biohazard_2_blur.png;
-		greeters.gtk.extraConfig = "default-user-background=false";
-		greeters.gtk.iconTheme.name = "Tango";
-		extraConfig = "greeter-hide-users=false";
-  	};
-	
   };
 
   environment.systemPackages = with pkgs; [
@@ -110,11 +102,7 @@
 	tpm2-tss
 	(writeTextDir "share/sddm/themes/breeze/theme.conf.user" ''
 			[General]
-			background=${background-sddm}		'')
-	# (callPackage ../loose-wm/wm.nix {})
-	#xorg.libX11
-  	#  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  	#  wget
+			background=${background-sddm}'')
   	];
 
   programs.hyprlock = {
@@ -176,18 +164,17 @@
     vimPlugins.nvim-lspconfig
     gcc
     ffmpeg
-    (import modules/zen.nix {inherit pkgs stdenv;}).zen-pkg
-    # bluez
-    #  thunderbird
+    inputs.zen-browser.packages."${system}".default
     ];
   };
 
+  home-manager.users.niko = import ./home-manager/home.nix;
+
   fonts.packages = with pkgs; [ nerd-fonts.symbols-only ];
 
-  programs.nix-ld.enable = true;
-
   # The state version is required and should stay at the version you
-  # originally in  # Install firefox.
+  # originally in
+
   programs.firefox.enable = true;
 
   programs.hyprland.enable = true;
@@ -210,23 +197,11 @@
 
   # for the breeze theme
   services.desktopManager.plasma6.enable = true;
+
   services.tailscale.enable = true;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
-
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
-
-  # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
