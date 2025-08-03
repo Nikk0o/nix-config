@@ -174,6 +174,11 @@
   # The state version is required and should stay at the version you
   # originally in
 
+	programs.hyprland = {
+		enable = true;
+		xwayland.enable = true;
+	};
+
   programs.firefox.enable = true;
 
   services.picom = {

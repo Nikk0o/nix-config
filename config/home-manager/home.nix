@@ -31,6 +31,7 @@
 		extraConfig = lib.readFile ../other_files/hyprland.conf;
   };
 
+	services.hyprpaper.enable = true;
 	services.hyprpaper.settings = {
 		preload = [
 			"/home/niko/Wallpapers/Buizilla-feet.jpg"
@@ -76,6 +77,7 @@
   home.packages = with pkgs; [
     xorg.libX11
     htop
+		hyprland
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
