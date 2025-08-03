@@ -18,7 +18,6 @@
   {
   imports = [
     (import "${home-manager}/nixos")
-		(import ./modules/hyprland.nix)
   ];
 
  networking.hostName = "Antares"; # Define your hostname.
@@ -176,9 +175,6 @@
   # originally in
 
   programs.firefox.enable = true;
-
-  programs.hyprland.enable = true;
-  programs.hyprland.xwayland.enable = true;
 
   services.picom = {
   	enable = true;

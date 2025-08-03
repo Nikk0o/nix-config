@@ -25,6 +25,22 @@
 
   imports = [ ];
 
+  wayland.windowManager.hyprland = {
+  	enable = true;
+
+		extraConfig = lib.readFile ../other_files/hyprland.conf;
+  };
+
+	services.hyprpaper.settings = {
+		preload = [
+			"/home/niko/Wallpapers/Buizilla-feet.jpg"
+		];
+
+		wallpaper = [
+			"eDP-1,/home/niko/Wallpapers/Buizilla-feet.jpg"
+		];
+	};
+
   services.hypridle = {
     enable = true;
     settings = {
